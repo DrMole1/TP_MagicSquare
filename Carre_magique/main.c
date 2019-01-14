@@ -1,3 +1,4 @@
+
 //BUT : Créer un carré magique, tableau d'entiers de 5 par 5 ou 7 par 7, incrémenté par des valeurs de 1 à 25 ou 1 à 49.
 //PRINCIPE : Le premier entier 1 se trouve au nord du milieu de la table
 //On place les chiffres de façon croissante en allant au nord est de la position courante, une seule fois
@@ -22,6 +23,10 @@
 #define CMAX 5
 #define CSMAX 6
 #define MIN 1
+#define XSTART 3
+#define YSTART 2
+#define XSTARTSUP 4
+#define YSTARTSUP 3
 
 //on définit la structure tJeton
 typedef struct tJeton
@@ -31,14 +36,16 @@ typedef struct tJeton
 
 }tJeton;
 
+//Enumération du booléen
+typedef enum Bool {false,true} Bool;
+
 // Prototype : signatures des méthodes
 // ======================================================================
-int main();
 void initialiser(int pnCarre[COTE][COTE], tJeton *pJeton);
 void afficher(const int nCarre[COTE][COTE]);
 void avancer_droite (tJeton *pJeton);
 void avancer_gauche(tJeton *pJeton);
-int rechercher_vide(const tJeton Jeton, const int nCarre[COTE][COTE], int nVide);
+Bool rechercher_vide(const tJeton Jeton, const int nCarre[COTE][COTE]);
 void avancer(tJeton *pJeton);
 void placer(const tJeton Jeton, int pnCarre[COTE][COTE], const int nCpt);
 // ======================================================================
@@ -57,7 +64,7 @@ int main()  //programme principal MAIN
 {
     //déclaration des variables locales au main
     int nCarre[COTE][COTE];
-    int nCpt=1, nVide=0;
+    int nCpt=1;
     tJeton Jeton;
 
     //procédure d'initialisation
@@ -68,7 +75,7 @@ int main()  //programme principal MAIN
     {
         avancer_droite (&Jeton);
         avancer(&Jeton);
-        if (rechercher_vide (Jeton, nCarre, nVide) == 0)
+        if (rechercher_vide (Jeton, nCarre)==0)
         {
             avancer_gauche(&Jeton);
             avancer(&Jeton);
@@ -111,12 +118,12 @@ void initialiser(int pnCarre[COTE][COTE], tJeton *pJeton)
     }
 
     //Initialisation des propriétés du Jeton
-    pJeton->nX = 3;  // Convention pour passer une valeur dans un pointeur dans une structure !
-    pJeton->nY = 2;
+    pJeton->nX = XSTART;  // Convention pour passer une valeur dans un pointeur dans une structure !
+    pJeton->nY = YSTART;
     if (COTE == 7)
     {
-        pJeton->nX = 4;  // si jamais la grille est de 7x7
-        pJeton->nY = 3;
+        pJeton->nX = XSTARTSUP;  // si jamais la grille est de 7x7
+        pJeton->nY = YSTARTSUP;
     }
 }
 
@@ -197,20 +204,22 @@ void avancer_gauche(tJeton *pJeton)
 // Note : Fonction car renvoie un résultat
 // =============================================================
 
-int rechercher_vide(const tJeton Jeton, const int nCarre[COTE][COTE], int nVide)
+Bool rechercher_vide(const tJeton Jeton, const int nCarre[COTE][COTE])
 {
+    Bool IsEmpty;
     if (nCarre[Jeton.nX][Jeton.nY] == 0)
     {
         // Si la valeur de la grille est 0, on appellera la procédure placer dans le programme principal
-        nVide = 1;
+        IsEmpty = 1;
+        // TO DO
     }
     else
     {
         //sinon, nous corrigeons la trajectoire du cheminement dans la programme principal
-        nVide = 0;
+        IsEmpty = 0;
     }
 
-    return nVide;
+    return IsEmpty;
 }
 
 
@@ -266,3 +275,6 @@ void placer(const tJeton Jeton, int pnCarre[COTE][COTE], const int nCpt)
     pnCarre[Jeton.nX][Jeton.nY] = nCpt;
 }
 
+//fichier .h qui détient les bibliothèques/déclarations
+//fichier .c qui contient les fonctions
+//fichier .c qui contient le programme principal
