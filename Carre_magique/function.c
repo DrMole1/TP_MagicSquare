@@ -26,7 +26,6 @@ void initialiser(int pnCarre[COTE][COTE], tJeton *pJeton)
         }
     }
 
-
     //Initialisation des propriétés du Jeton
     pJeton->nX = XSTART;  // Convention pour passer une valeur dans un pointeur dans une structure !
     pJeton->nY = YSTART;

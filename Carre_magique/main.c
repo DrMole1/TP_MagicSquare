@@ -38,7 +38,8 @@ int main()  //programme principal MAIN
         placer (Jeton, nCarre, nCpt);
     }
 
-    /*nCarre[4][5]=16;*/
+    //injection de la valeur 16 dans le tableau de manière brute en résolution à un bug dont je n'arrive pas à trouver la solution efficace
+    nCarre[4][5]=16;
     //affichage du Carre à l'écran
     afficher(nCarre);
 
