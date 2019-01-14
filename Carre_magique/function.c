@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "head.h"
 
 //Procédure
@@ -144,28 +145,29 @@ Bool rechercher_vide(const tJeton Jeton, const int nCarre[COTE][COTE])
 
 void avancer(tJeton *pJeton)
 {
-    if (pJeton->nX>CMAX && pJeton->nY>=CMIN)
+    if (pJeton->nX>CMAX)
     {
         pJeton->nX=CMIN;
+        //si le jeton dépasse vers la droite, on le fait revenir en WRAP vers la gauche
     }
-    else if (pJeton->nX>=CMIN && pJeton->nY>CMAX)
-    {
-        pJeton->nY=CMIN;
-    }
-
-    else if(pJeton->nX<CMIN && pJeton->nY>=CMIN)
+    else if (pJeton->nX<CMIN)
     {
         pJeton->nX=CMAX;
+        //si le jeton dépasse vers la gauche, on le fait revenir en WRAP vers la droite
     }
 
-    else if(pJeton->nX>=CMIN && pJeton->nY<=CSMIN)
+    if (pJeton->nY>CMAX)
+    {
+        pJeton->nY=CMIN;
+        //si le jeton dépasse vers le bas, on le fait revenir en WRAP vers le haut
+    }
+    else if (pJeton->nY<CMIN)
     {
         pJeton->nY=CMAX;
+        //si le jeton dépasse vers le haut, on le fait revenir en WRAP vers le bas
     }
-    else if(pJeton->nX>=CMIN && pJeton->nY>=CSMAX)
-    {
-        pJeton->nY=CMAX;
-    }
+
+
 }
 
 

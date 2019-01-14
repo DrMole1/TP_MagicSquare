@@ -34,13 +34,8 @@ int main()  //programme principal MAIN
         {
             avancer_gauche(&Jeton);
             avancer(&Jeton);
-            placer (Jeton, nCarre, nCpt);
         }
-        else
-        {
-            avancer(&Jeton);
-            placer (Jeton, nCarre, nCpt);
-        }
+        placer (Jeton, nCarre, nCpt);
     }
 
     /*nCarre[4][5]=16;*/
