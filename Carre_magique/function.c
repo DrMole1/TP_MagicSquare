@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "head.h"
 
 //Procédure
@@ -17,22 +18,19 @@ void initialiser(int pnCarre[COTE][COTE], tJeton *pJeton)
     int nCpt=0, nCpt2=0;
 
     //boucles imbriquées de traitement pour assigner à chaque cellule la valeur 0
-    for (nCpt=MIN ; nCpt < SUP ; nCpt++)
+    for (nCpt=MIN ; nCpt <= COTE ; nCpt++)
     {
-        for (nCpt2=1 ; nCpt2 < SUP ; nCpt2++)
+        for (nCpt2=1 ; nCpt2 <= COTE ; nCpt2++)
         {
             pnCarre[nCpt][nCpt2] = 0;
         }
     }
 
-    //Initialisation des propriétés du Jeton
-    pJeton->nX = XSTART;  // Convention pour passer une valeur dans un pointeur dans une structure !
-    pJeton->nY = YSTART;
-    if (COTE == 7)
-    {
-        pJeton->nX = XSTARTSUP;  // si jamais la grille est de 7x7
-        pJeton->nY = YSTARTSUP;
-    }
+    //Initialisation des propriétés du Jeton pour qu'il soit au nord du centre, peu importe le côté
+    //utilisation d'un cast pour faire passer un double en int
+    //le floor sert à tronquer à l'entier inférieur (floor=étage)
+    pJeton->nX = (int)(floor(COTE/2)+1);
+    pJeton->nY = (int)(floor(COTE/2));
 }
 
 
@@ -53,10 +51,10 @@ void afficher(const int nCarre[COTE][COTE])
     int nCpt=0, nCpt2=0;
 
     //boucles imbriquées pour afficher la grille
-    for (nCpt=MIN ; nCpt < SUP ; nCpt++)
+    for (nCpt=MIN ; nCpt <= COTE ; nCpt++)
     {
         printf("\n");  //retour chariot
-        for (nCpt2=1 ; nCpt2 < SUP ; nCpt2++)
+        for (nCpt2=1 ; nCpt2 <= COTE ; nCpt2++)
         {
             printf("%d ", nCarre[nCpt][nCpt2]);
         }

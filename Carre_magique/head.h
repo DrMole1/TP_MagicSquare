@@ -20,13 +20,10 @@
 #define SUP 6
 #define CMIN 1
 #define CSMIN 0
-#define CMAX 5
-#define CSMAX 6
+#define CMAX 5  //doit toujours être =COTE !!!!
+#define CSMAX 6 //doit toujours être =COTE+1 !!!!
 #define MIN 1
-#define XSTART 3
-#define YSTART 2
-#define XSTARTSUP 4
-#define YSTARTSUP 3
+
 
 //on définit la structure tJeton
 typedef struct tJeton
